@@ -1,8 +1,6 @@
 <template>
-    <router-link class="menu" to="/">
-      <div class="item">
+    <router-link class="item" to="/">
         Меню
-      </div>
     </router-link>
 
 </template>
@@ -16,11 +14,7 @@ export default {
 
 <style scoped>
 
-  .menu {
-    width: 1200px;
-  }
-
-  .item {
+ .item {
     margin: 10px auto;
     width: 300px;
     height: 100px;
