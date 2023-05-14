@@ -8,20 +8,23 @@
 
 <script>
 import Article from "../../components/Article/Article.vue";
+import axios from "axios";
+import ArticleInner from "@/pages/ArticleInner/ArticleInner.vue";
 
 export default {
   name: "Articles",
-  components: {Article},
+  components: {ArticleInner, Article},
   data() {
     return {
-      articles: [
-        {id: 1, title: 'title', body: 'body'},
-        {id: 2, title: 'title2', body: 'body1'},
-        {id: 3, title: 'title3', body: 'body2'},
-        {id: 4, title: 'title4', body: 'body3'}
-      ]
+      articles: []
     }
   },
+  beforeCreate() {
+    axios.get("http://localhost:8000/api/articles")
+        .then(res => this.articles = res.data)
+        .catch(err => console.log(err))
+  }
+
 }
 
 

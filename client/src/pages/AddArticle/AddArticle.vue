@@ -17,11 +17,13 @@
                @input= 'text = $event.target.value'
      ></textarea>
    </div>
-   <button @click="titleError" class="btn">Добавить</button>
+   <button @click="bigClick" class="btn">Добавить</button>
  </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "AddArticle",
   data() {
@@ -32,14 +34,23 @@ export default {
     }
   },
   methods: {
+    bigClick() {
+      this.titleError()
+      if(!this.hasError) {
+        this.addArticle()
+      }
+    },
     titleError() {
       return this.title.length >= 50 ? this.hasError = true : this.hasError = false ;
     },
+    addArticle() {
+      axios.post('http://localhost:8000/api/article', {
+        title: this.title,
+        body: this.text,
+      }).then((res) => console.log(res)).catch((err) => console.log(err))
+      this.$router.push('/')
+    }
   },
-  computed: {
-
-
-  }
 }
 
 
